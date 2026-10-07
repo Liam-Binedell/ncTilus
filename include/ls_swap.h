@@ -1,16 +1,8 @@
 #ifndef LS_SWAP
 #define LS_SWAP
 
-#include <dirent.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include "../include/dir_entry.h"
 
-int print_dir_contents(char *dir);
+int read_dir_contents_to_arr(char *dir, struct DirArray *arr);
 
 #endif // !LS_SWAP
