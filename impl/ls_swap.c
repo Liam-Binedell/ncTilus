@@ -42,18 +42,18 @@ int read_dir_contents_to_arr(char *dir, struct DirArray *arr) {
       goto cleanup;
     }
 
-    if (errno != 0) {
-      fprintf(stderr, "readdir (%s): %s\n", dir, strerror(errno));
-      goto cleanup;
-    }
-
     entry.size = file_stat.st_size;
     memcpy(entry.absolute_path, absolute_path, sizeof(absolute_path));
     memcpy(entry.relative_path, rel_path, sizeof(rel_path));
     entry.is_dir = S_ISDIR(file_stat.st_mode);
     push_dir_entry(arr, entry);
+    errno = 0;
   }
 
+  if (errno != 0) {
+    fprintf(stderr, "readdir (%s): %s\n", file_name, strerror(errno));
+    goto cleanup;
+  }
   status = EXIT_SUCCESS;
 cleanup:
   if (errno != 0) {
