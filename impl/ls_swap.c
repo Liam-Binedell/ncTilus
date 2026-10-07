@@ -43,8 +43,9 @@ int read_dir_contents_to_arr(char *dir, struct DirArray *arr) {
     }
 
     entry.size = file_stat.st_size;
-    memcpy(entry.absolute_path, absolute_path, sizeof(absolute_path));
-    memcpy(entry.relative_path, rel_path, sizeof(rel_path));
+    entry.absolute_path = strdup(absolute_path);
+    entry.relative_path = strdup(rel_path);
+    entry.file_name = strdup(file_name);
     entry.is_dir = S_ISDIR(file_stat.st_mode);
     push_dir_entry(arr, entry);
     errno = 0;
