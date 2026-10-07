@@ -25,7 +25,13 @@ void push_dir_entry(struct DirArray *arr, const struct DirEntry entry) {
   arr->data[arr->size++] = entry;
 }
 
-/* UNUSED DUE TO POINTER BEING SINGLE DIM */
-// void free_dir_arr(struct DirArray *arr) {
-//
-// }
+void free_dir_arr(struct DirArray *arr) {
+  for (int i = 0; i < arr->size; i++) {
+    struct DirEntry entry = arr->data[i];
+    free(entry.absolute_path);
+    free(entry.relative_path);
+    free(entry.file_name);
+  }
+  free(arr->data);
+  arr->data = NULL;
+}
