@@ -32,7 +32,10 @@ int read_dir_contents_to_arr(char *dir, struct DirArray *arr) {
   while ((dp = readdir(dirp)) != NULL) {
     file_name = dp->d_name;
     snprintf(rel_path, sizeof(rel_path), "%s/%s", dir, file_name);
-    realpath(file_name, absolute_path);
+    if (realpath(rel_path, absolute_path) == NULL) {
+      fprintf(stderr, "realpath(%s): %s\n", rel_path, strerror(errno));
+      continue;
+    }
 
     if ((stat(rel_path, &file_stat)) == -1) {
       fprintf(stderr, "stat: %s: %s\n", rel_path, strerror(errno));
