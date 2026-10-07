@@ -7,8 +7,9 @@
 
 struct DirEntry {
   size_t size;
-  char absolute_path[PATH_MAX];
-  char relative_path[PATH_MAX];
+  char *absolute_path;
+  char *relative_path;
+  char *file_name;
   bool is_dir;
 };
 
