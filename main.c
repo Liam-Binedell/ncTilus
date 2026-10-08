@@ -1,44 +1,11 @@
 #include <limits.h>
 #include <ncurses.h>
+#include <stdbool.h>
 #include <unistd.h>
 
-#include "include/dir_entry.h"
-#include "include/ls_swap.h"
-
-WINDOW *create_browser_win(int y_max, int x_max) {
-  int y_offset, x_offset, x;
-  WINDOW *local_win;
-
-  y_offset = y_max * 0.05;
-  x_offset = x_max * 0.17;
-  x = 1;
-
-  local_win = newwin(y_max - y_offset, x + x_offset, y_offset / 2, x);
-  box(local_win, 0, 0);
-  wattron(local_win, A_BOLD | A_UNDERLINE);
-  mvwprintw(local_win, 0, 1, "Parent");
-  wattroff(local_win, A_BOLD | A_UNDERLINE);
-
-  wrefresh(local_win);
-
-  return local_win;
-}
-
-WINDOW *create_directory_win(int y_max, int x_max) {
-  int y_offset, x_offset;
-  WINDOW *local_win;
-
-  y_offset = y_max * 0.05;
-  x_offset = x_max * 0.2;
-
-  local_win =
-      newwin(y_max - y_offset, x_max - x_offset, y_offset / 2, x_offset);
-  box(local_win, 0, 0);
-
-  wrefresh(local_win);
-
-  return local_win;
-}
+#include "dir_entry.h"
+#include "ls_swap.h"
+#include "window_manager.h"
 
 int main() {
   char ch, cwd[PATH_MAX];
@@ -50,8 +17,8 @@ int main() {
   getcwd(cwd, sizeof(cwd));
   dir_tree = create_dir_arr();
   dir_contents = create_dir_arr();
-  read_dir_contents_to_arr("..", &dir_tree);
-  read_dir_contents_to_arr(".", &dir_contents);
+  read_dir_contents_to_arr("..", &dir_tree, true);
+  read_dir_contents_to_arr(".", &dir_contents, false);
 
   initscr();
   cbreak();
