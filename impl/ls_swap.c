@@ -8,7 +8,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-int read_dir_contents_to_arr(char *dir, struct DirArray *arr) {
+int read_dir_contents_to_arr(const char *dir, struct DirArray *arr,
+                             const bool dirs_only) {
   int status;
   char rel_path[PATH_MAX], absolute_path[PATH_MAX];
   char *file_name;
@@ -42,11 +43,13 @@ int read_dir_contents_to_arr(char *dir, struct DirArray *arr) {
       goto cleanup;
     }
 
+    entry.is_dir = S_ISDIR(file_stat.st_mode);
+    if (dirs_only && !entry.is_dir)
+      continue;
     entry.size = file_stat.st_size;
     entry.absolute_path = strdup(absolute_path);
     entry.relative_path = strdup(rel_path);
     entry.file_name = strdup(file_name);
-    entry.is_dir = S_ISDIR(file_stat.st_mode);
     push_dir_entry(arr, entry);
     errno = 0;
   }
