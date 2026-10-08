@@ -1,0 +1,54 @@
+[
+  {
+    "file": "main.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-Wall",
+      "main.c",
+      "-o",
+      "bin/nls"
+    ],
+    "directory": "/home/lee/Projects/nls",
+    "output": "bin/nls"
+  },
+  {
+    "file": "impl/dir_entry.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-Wall",
+      "impl/dir_entry.c",
+      "-o",
+      "bin/nls"
+    ],
+    "directory": "/home/lee/Projects/nls",
+    "output": "bin/nls"
+  },
+  {
+    "file": "impl/ls_swap.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-Wall",
+      "impl/ls_swap.c",
+      "-o",
+      "bin/nls"
+    ],
+    "directory": "/home/lee/Projects/nls",
+    "output": "bin/nls"
+  },
+  {
+    "file": "impl/window_manager.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-Wall",
+      "impl/window_manager.c",
+      "-o",
+      "bin/nls"
+    ],
+    "directory": "/home/lee/Projects/nls",
+    "output": "bin/nls"
+  }
+]

@@ -1,4 +1,4 @@
-#include "../include/ls_swap.h"
+#include "ls_swap.h"
 
 #include <dirent.h>
 #include <errno.h>

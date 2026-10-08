@@ -1,4 +1,4 @@
-#include "../include/dir_entry.h"
+#include "dir_entry.h"
 
 #include <errno.h>
 #include <stdio.h>
